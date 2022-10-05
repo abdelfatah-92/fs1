@@ -1,12 +1,16 @@
 import { useState } from "react";
 
-const Statistics = (props) => {
+/*const Statistics = (props) => {
  const {text, hanleEvent, text2} = props
  console.log(props)
   return (
-    <div>{text} {hanleEvent} {text2}</div>
+    <table>
+      <tr>
+       <td>{text}</td><td>{hanleEvent} {text2}</td>
+      </tr>
+    </table>
   )
-}
+}*/
 const Button = (props) => {
   return (
     <button onClick={props.hanleEvent}>{props.text}</button>
@@ -41,29 +45,53 @@ const App = () => {
   if (good === 0 && bad === 0 && neutral === 0){
     return(
       <>
-         <h1>Give feedback</h1>
-         <button onClick= {handleGoodClick}>good</button>
-         <button onClick= {handleNeutralClick}>neutral</button>
-         <button onClick= {handleBadClick}>bad</button>
-         <h1>statistics</h1>
-         <p>No feedback given</p>
+        <h1>Give feedback</h1>
+        <button onClick= {handleGoodClick}>good</button>
+        <button onClick= {handleNeutralClick}>neutral</button>
+        <button onClick= {handleBadClick}>bad</button>
+        <h1>statistics</h1>
+        <p>No feedback given</p>
       </>
-    )}
+    )
+  }
  return (
-  <div>
-   <h1>Give feedback</h1>
-   <Button hanleEvent={handleGoodClick} text='good' />
-   <Button hanleEvent={handleNeutralClick} text='neutral' />
-   <Button hanleEvent={handleBadClick} text='bad' />
-   <h1>statistics</h1>
-   <Statistics text="good" hanleEvent= {good} />
-   <Statistics text="neutral" hanleEvent= {neutral} />
-   <Statistics text="bad" hanleEvent= {bad} />
-   <Statistics text="all" hanleEvent= {all} />
-   <Statistics text="average" hanleEvent= {average} />   
-   <Statistics text="positive" hanleEvent= {positive} text2= "%"/>
-  </div>
+  <body>
+      <h1>Give feedback</h1>
+      <Button hanleEvent={handleGoodClick} text='good' />
+      <Button hanleEvent={handleNeutralClick} text='neutral' />
+      <Button hanleEvent={handleBadClick} text='bad' />
+      <h1>statistics</h1>
+      <table>
+       <tr>
+        <td>good</td><td>{good}</td>
+       </tr>
+       <tr>
+        <td>neutral</td><td>{neutral}</td>
+       </tr>
+       <tr>
+        <td>bad</td><td>{bad}</td>
+       </tr>
+       <tr>
+        <td>all</td><td>{all}</td>
+       </tr>
+       <tr>
+        <td>average</td><td>{average}</td>
+       </tr>
+       <tr>
+        <td>positive</td><td>{positive} %</td>
+       </tr>
+      </table>
+
+   </body> 
  )
 }
 
 export default App;
+  
+
+/*<Statistics text="good" hanleEvent= {good} /> 
+      <Statistics text="neutral" hanleEvent= {neutral} />
+      <Statistics text="bad" hanleEvent= {bad} />
+      <Statistics text="all" hanleEvent= {all} /> 
+      <Statistics text="average" hanleEvent= {average} />   
+      <Statistics text="positive" hanleEvent= {positive} text2= "%"/> */
