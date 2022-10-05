@@ -1,97 +1,44 @@
 import { useState } from "react";
 
-/*const Statistics = (props) => {
- const {text, hanleEvent, text2} = props
- console.log(props)
-  return (
-    <table>
-      <tr>
-       <td>{text}</td><td>{hanleEvent} {text2}</td>
-      </tr>
-    </table>
-  )
-}*/
-const Button = (props) => {
-  return (
-    <button onClick={props.hanleEvent}>{props.text}</button>
-  )
-}
 const App = () => {
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-  const [all, setAll] = useState(0)
-  const [average, setAverage] = useState(0)
-  const [positive, setPositive] = useState(0)
-  // handeling clicks 
-  const handleGoodClick = () => {
-    setAll(all+1)
-    setGood(good+1)
-    setAverage((good+1-bad)/(all+1))
-    setPositive(((good+1)/(all+1))*100)
+  const anecdotes = [
+    'If it hurts, do it more often.',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.'
+  ]
+   
+  const [selected, setSelected] = useState(0)
+  const [newVote, setNewVote] = useState(Array(7).fill(0))
+  const rand = Math.floor(Math.random()*7) 
+  const handleClick = () => {
+    setSelected(rand)
   }
-  const handleNeutralClick = () => {
-    setAll(all+1)
-    setNeutral(neutral+1)
-    setAverage((good - bad)/(all+1))
-    setPositive(((good)/(all+1))*100)
+  const handleVoteClick = () => {
+    const v = [...newVote]
+    v[selected] += 1
+    setNewVote(v) 
   }
-  const handleBadClick = () => {
-    setAll(all+1)
-    setBad(bad+1)
-    setAverage((good-bad-1)/(all+1))
-    setPositive(((good)/(all+1))*100)
-  }
-  if (good === 0 && bad === 0 && neutral === 0){
-    return(
-      <>
-        <h1>Give feedback</h1>
-        <button onClick= {handleGoodClick}>good</button>
-        <button onClick= {handleNeutralClick}>neutral</button>
-        <button onClick= {handleBadClick}>bad</button>
-        <h1>statistics</h1>
-        <p>No feedback given</p>
-      </>
-    )
-  }
- return (
-  <body>
-      <h1>Give feedback</h1>
-      <Button hanleEvent={handleGoodClick} text='good' />
-      <Button hanleEvent={handleNeutralClick} text='neutral' />
-      <Button hanleEvent={handleBadClick} text='bad' />
-      <h1>statistics</h1>
-      <table>
-       <tr>
-        <td>good</td><td>{good}</td>
-       </tr>
-       <tr>
-        <td>neutral</td><td>{neutral}</td>
-       </tr>
-       <tr>
-        <td>bad</td><td>{bad}</td>
-       </tr>
-       <tr>
-        <td>all</td><td>{all}</td>
-       </tr>
-       <tr>
-        <td>average</td><td>{average}</td>
-       </tr>
-       <tr>
-        <td>positive</td><td>{positive} %</td>
-       </tr>
-      </table>
+ 
+    const a = Math.max(...newVote)
+    const b = newVote.indexOf(a)
+    const c = anecdotes[b]
 
-   </body> 
- )
+  return (
+    <div>
+     <h1>anecdote of the day</h1>
+     <p>{anecdotes[selected]}</p>
+     <p>has {newVote[selected]} votes</p>
+     <button onClick={handleClick}>next anecdotes</button>
+     <button onClick={handleVoteClick}>votes</button>
+     <h2>anecdotes with most votes</h2>
+     <div>{c}</div>
+    </div>
+  )
 }
-
 export default App;
   
 
-/*<Statistics text="good" hanleEvent= {good} /> 
-      <Statistics text="neutral" hanleEvent= {neutral} />
-      <Statistics text="bad" hanleEvent= {bad} />
-      <Statistics text="all" hanleEvent= {all} /> 
-      <Statistics text="average" hanleEvent= {average} />   
-      <Statistics text="positive" hanleEvent= {positive} text2= "%"/> */
